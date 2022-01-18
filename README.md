@@ -4,7 +4,7 @@
 The RDR payload will execute the native GET_CLOCK_DAY_OF_MONTH is called by RDR2 scripts.
 
 # Build:
-build with this <a href="https://www.mediafire.com/file/zua0yjngr0ux1jf/libPS4.7z"> libPS4</a>
+build with this <a href="https://github.com/Scene-Collective/ps4-payload-sdk">Scene-Collective SDK</a>
 
 # Credits:
 rfoodxmodz<br>
