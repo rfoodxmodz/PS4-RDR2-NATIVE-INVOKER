@@ -6,7 +6,6 @@ The RDR payload will execute the native GET_CLOCK_DAY_OF_MONTH is called by RDR2
 
 
 # Credits:
-Credits:
 rfoodxmodz<br>
 2much4u<br>
 And who made this possible.
