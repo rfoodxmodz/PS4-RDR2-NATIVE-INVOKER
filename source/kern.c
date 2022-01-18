@@ -15,30 +15,30 @@ void setHIDWORD(uint64_t *_var, DWORD _v)
     *_var |= (uint64_t)_v << 32;
 }
 
-static inline __attribute__((always_inline)) uint64_t __readmsr(unsigned long __register) {
-  unsigned long __edx;
-  unsigned long __eax;
-  __asm__("rdmsr"
-          : "=d"(__edx), "=a"(__eax)
-          : "c"(__register));
-  return (((uint64_t)__edx) << 32) | (uint64_t)__eax;
-}
+// static inline __attribute__((always_inline)) uint64_t __readmsr(unsigned long __register) {
+  // unsigned long __edx;
+  // unsigned long __eax;
+  // __asm__("rdmsr"
+          // : "=d"(__edx), "=a"(__eax)
+          // : "c"(__register));
+  // return (((uint64_t)__edx) << 32) | (uint64_t)__eax;
+// }
 
-static inline __attribute__((always_inline)) uint64_t readCr0(void) {
-  uint64_t cr0;
-  __asm__ volatile("movq %0, %%cr0"
-                   : "=r"(cr0)
-                   :
-                   : "memory");
-  return cr0;
-}
+// static inline __attribute__((always_inline)) uint64_t readCr0(void) {
+  // uint64_t cr0;
+  // __asm__ volatile("movq %0, %%cr0"
+                   // : "=r"(cr0)
+                   // :
+                   // : "memory");
+  // return cr0;
+// }
 
-static inline __attribute__((always_inline)) void writeCr0(uint64_t cr0) {
-  __asm__ volatile("movq %%cr0, %0"
-                   :
-                   : "r"(cr0)
-                   : "memory");
-}
+// static inline __attribute__((always_inline)) void writeCr0(uint64_t cr0) {
+  // __asm__ volatile("movq %%cr0, %0"
+                   // :
+                   // : "r"(cr0)
+                   // : "memory");
+// }
 
 int kpayload_get_fw_version(struct thread *td, struct kpayload_get_fw_version_args *args) {
   void *kernel_base = 0;
@@ -395,6 +395,9 @@ int kpayload_jailbreak(struct thread *td, struct kpayload_jailbreak_args *args) 
 	// patch memcpy first
 	*(uint8_t *)(ptrKernel + 0x003C15BD) = 0xEB;
 
+	// Patch dynlib_dlsym
+	memcpy((void *)(ptrKernel + 0x1D895A), "\xE9\xC7\x01\x00\x00", 5);
+  
     // patch ptrace
     *(uint8_t *)(ptrKernel + 0x10F879) = 0xEB;
 	memcpy((void *)(ptrKernel + 0x10FD22), "\xE9\xE2\x02\x00\x00", 5);
