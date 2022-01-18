@@ -163,7 +163,7 @@ int _main(void) {
 	int sysUtil = sceKernelLoadStartModule("/system/common/lib/libSceSysUtil.sprx", 0, NULL, 0, 0, 0);
 	RESOLVE(sysUtil, sceSysUtilSendSystemNotificationWithText);
 	RESOLVE(libc, ceil);
-	sysNotify("ArabicGuy V1.0 Menu loaded.\nPlease launch RDR2.");
+	sysNotify("RDR2 Native Invoker loaded.\nPlease launch RDR2.");
 	gamePID = findProcess("eboot.bin");
 	
 	sceKernelSleep(3);
@@ -178,6 +178,6 @@ int _main(void) {
 	while (!setupDone()) sceKernelSleep(3);
 	sceKernelSleep(5);
 	startExecution();
-	sysNotify("ArabicGuy Menu Activated.\nEnjoy!");
+	sysNotify("Native Invoker Activated.\nEnjoy!");
 	return 0;
 }
